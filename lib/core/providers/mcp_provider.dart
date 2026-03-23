@@ -1354,14 +1354,41 @@ class McpProvider extends ChangeNotifier {
   Future<String?> _getSystemPath() async {
     if (_cachedSystemPath != null) return _cachedSystemPath;
     if (!Platform.isMacOS) return null;
+
+    // 1. Try launchctl — works when launchd has PATH set
     try {
       final result = await Process.run('launchctl', ['getenv', 'PATH']);
-      if (result.exitCode == 0) {
-        _cachedSystemPath = (result.stdout as String).trim();
+      final path = (result.stdout as String).trim();
+      if (result.exitCode == 0 && path.isNotEmpty) {
+        _cachedSystemPath = path;
         return _cachedSystemPath;
       }
     } catch (_) {}
-    return null;
+
+    // 2. Try /usr/libexec/path_helper — reads /etc/paths and /etc/paths.d
+    try {
+      final result = await Process.run('/usr/libexec/path_helper', ['-s']);
+      if (result.exitCode == 0) {
+        final output = result.stdout as String;
+        final match = RegExp(r'PATH="([^"]+)"').firstMatch(output);
+        if (match != null) {
+          _cachedSystemPath = match.group(1)!;
+          return _cachedSystemPath;
+        }
+      }
+    } catch (_) {}
+
+    // 3. Hardcoded common paths as last resort
+    _cachedSystemPath = [
+      '/opt/homebrew/bin',
+      '/opt/homebrew/sbin',
+      '/usr/local/bin',
+      '/usr/bin',
+      '/bin',
+      '/usr/sbin',
+      '/sbin',
+    ].join(':');
+    return _cachedSystemPath;
   }
 
   Future<Map<String, String>> _resolveEnvironmentWithPath(
