@@ -4364,4 +4364,149 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get worldBookInjectionRoleAssistant => 'Assistant';
+
+  @override
+  String get saPresetSummarize => 'Summarize';
+
+  @override
+  String get saPresetExplain => 'Explain';
+
+  @override
+  String get saPresetFixGrammar => 'Fix Grammar';
+
+  @override
+  String get saPresetTranslateAndRead => 'Translate & Read';
+
+  @override
+  String saPromptSummarize(String text) {
+    return 'Summarize concisely: $text';
+  }
+
+  @override
+  String saPromptExplain(String text) {
+    return 'Explain simply: $text';
+  }
+
+  @override
+  String saPromptFixGrammar(String text) {
+    return 'Fix grammar and style: $text';
+  }
+
+  @override
+  String saPromptTranslate(String targetLanguage, String text) {
+    return 'Translate the following text to $targetLanguage. Return only the translation, no explanations:\n\n$text';
+  }
+
+  @override
+  String get saActionTranslate => 'Translate';
+
+  @override
+  String get saActionRead => 'Read';
+
+  @override
+  String get saActionSendToChat => 'Send to Chat';
+
+  @override
+  String get saResultCopy => 'Copy';
+
+  @override
+  String get saResultClose => 'Close';
+
+  @override
+  String get saResultRetry => 'Retry';
+
+  @override
+  String get saResultCancel => 'Cancel';
+
+  @override
+  String get saResultProcessing => 'Processing...';
+
+  @override
+  String get saResultTranslationTitle => 'Translation';
+
+  @override
+  String get saResultLanguageSelector => 'Target language';
+
+  @override
+  String get saErrorNoProvider =>
+      'Please configure an LLM provider in Kelivo settings';
+
+  @override
+  String get saErrorTimeout => 'Request timed out. Please try again.';
+
+  @override
+  String saErrorNetwork(String message) {
+    return 'Network error: $message';
+  }
+
+  @override
+  String saErrorApiKey(String code) {
+    return 'API key error (code: $code). Please check your settings.';
+  }
+
+  @override
+  String get saSettingsTitle => 'Selection Assistant';
+
+  @override
+  String get saSettingsEnable => 'Enable Selection Assistant';
+
+  @override
+  String get saSettingsEnableSubtitle => 'Detect text selection in other apps';
+
+  @override
+  String get saSettingsShowTranslate => 'Show Translate button';
+
+  @override
+  String get saSettingsShowTts => 'Show Read button';
+
+  @override
+  String get saSettingsShowChat => 'Show Send to Chat button';
+
+  @override
+  String get saSettingsShowPresets => 'Show preset buttons';
+
+  @override
+  String get saSettingsDismissDelay => 'Dismiss delay';
+
+  @override
+  String saSettingsDismissDelayMs(int ms) {
+    return '${ms}ms';
+  }
+
+  @override
+  String get saSettingsTranslateLanguage => 'Translation target language';
+
+  @override
+  String get saSettingsMaxTextLength => 'Max text length';
+
+  @override
+  String saSettingsMaxTextLengthChars(int n) {
+    return '$n characters';
+  }
+
+  @override
+  String get saAccessibilityTitle => 'Accessibility Permission Required';
+
+  @override
+  String get saAccessibilityMessage =>
+      'Selection Assistant needs Accessibility access to detect selected text. No data is sent without your action.';
+
+  @override
+  String get saAccessibilityOpenSettings => 'Open System Settings';
+
+  @override
+  String get saAccessibilityGranted => 'Permission granted';
+
+  @override
+  String get saAccessibilityWaiting => 'Waiting for permission...';
+
+  @override
+  String get saTrayToggleOn => 'Disable Selection Assistant';
+
+  @override
+  String get saTrayToggleOff => 'Enable Selection Assistant';
+
+  @override
+  String get saRequiresTray =>
+      'Enable \'Minimize to tray on close\' to use this feature';
 }

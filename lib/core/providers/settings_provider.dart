@@ -20,6 +20,7 @@ import '../../utils/sandbox_path_resolver.dart';
 import '../../utils/avatar_cache.dart';
 import '../utils/openai_model_compat.dart';
 import '../../utils/provider_grouping_logic.dart';
+import '../../shared/interfaces/markdown_settings.dart';
 
 // Desktop: topic list position
 enum DesktopTopicPosition { left, right }
@@ -29,7 +30,7 @@ enum DesktopSendShortcut { enter, ctrlEnter }
 
 enum _MigrationResult { noChange, applied, failed }
 
-class SettingsProvider extends ChangeNotifier {
+class SettingsProvider extends ChangeNotifier implements MarkdownSettings {
   static const String _providersOrderKey = 'providers_order_v1';
   static const String _providerGroupsKey =
       'provider_groups_v1'; // [{id,name,createdAt}]
@@ -1154,9 +1155,13 @@ class SettingsProvider extends ChangeNotifier {
   String? _appFontLocalAlias;
   String? _codeFontLocalAlias;
 
+  @override
   String? get appFontFamily => _effectiveAppFontAlias ?? _appFontFamily;
+  @override
   String? get codeFontFamily => _effectiveCodeFontAlias ?? _codeFontFamily;
+  @override
   bool get appFontIsGoogle => _appFontIsGoogle;
+  @override
   bool get codeFontIsGoogle => _codeFontIsGoogle;
   String? get appFontLocalAlias => _appFontLocalAlias;
   String? get codeFontLocalAlias => _codeFontLocalAlias;
@@ -2827,6 +2832,7 @@ DO NOT GIVE ANSWERS OR DO HOMEWORK FOR THE USER. If the user asks a math or logi
 
   // Display: inline $...$ LaTeX rendering
   bool _enableDollarLatex = true;
+  @override
   bool get enableDollarLatex => _enableDollarLatex;
   Future<void> setEnableDollarLatex(bool v) async {
     if (_enableDollarLatex == v) return;
@@ -2838,6 +2844,7 @@ DO NOT GIVE ANSWERS OR DO HOMEWORK FOR THE USER. If the user asks a math or logi
 
   // Display: LaTeX math rendering (inline/block)
   bool _enableMathRendering = true;
+  @override
   bool get enableMathRendering => _enableMathRendering;
   Future<void> setEnableMathRendering(bool v) async {
     if (_enableMathRendering == v) return;
@@ -2893,6 +2900,7 @@ DO NOT GIVE ANSWERS OR DO HOMEWORK FOR THE USER. If the user asks a math or logi
 
   // Display: mobile code block word wrap
   bool _mobileCodeBlockWrap = false;
+  @override
   bool get mobileCodeBlockWrap => _mobileCodeBlockWrap;
   Future<void> setMobileCodeBlockWrap(bool v) async {
     if (_mobileCodeBlockWrap == v) return;
@@ -2904,6 +2912,7 @@ DO NOT GIVE ANSWERS OR DO HOMEWORK FOR THE USER. If the user asks a math or logi
 
   // Display: auto-collapse code blocks
   bool _autoCollapseCodeBlock = false;
+  @override
   bool get autoCollapseCodeBlock => _autoCollapseCodeBlock;
   Future<void> setAutoCollapseCodeBlock(bool v) async {
     if (_autoCollapseCodeBlock == v) return;
@@ -2915,6 +2924,7 @@ DO NOT GIVE ANSWERS OR DO HOMEWORK FOR THE USER. If the user asks a math or logi
 
   // Display: code block auto-collapse threshold (lines)
   int _autoCollapseCodeBlockLines = 2;
+  @override
   int get autoCollapseCodeBlockLines => _autoCollapseCodeBlockLines;
   Future<void> setAutoCollapseCodeBlockLines(int v) async {
     final next = v.clamp(1, 999);

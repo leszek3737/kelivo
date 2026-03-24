@@ -458,6 +458,20 @@ class HomePageController extends ChangeNotifier {
             });
           }
           break;
+        case ChatAction.focusInputWithText:
+          if (isDesktopPlatform) {
+            final text = ChatActionBus.instance.popPendingText();
+            if (text != null && text.isNotEmpty) {
+              _inputController.text = text;
+              _inputController.selection = TextSelection.fromPosition(
+                TextPosition(offset: text.length),
+              );
+            }
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              _inputFocus.requestFocus();
+            });
+          }
+          break;
         case ChatAction.switchModel:
           unawaited(showModelSelectSheet(ctx));
           break;

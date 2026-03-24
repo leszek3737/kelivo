@@ -8149,6 +8149,258 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Assistant'**
   String get worldBookInjectionRoleAssistant;
+
+  /// No description provided for @saPresetSummarize.
+  ///
+  /// In en, this message translates to:
+  /// **'Summarize'**
+  String get saPresetSummarize;
+
+  /// No description provided for @saPresetExplain.
+  ///
+  /// In en, this message translates to:
+  /// **'Explain'**
+  String get saPresetExplain;
+
+  /// No description provided for @saPresetFixGrammar.
+  ///
+  /// In en, this message translates to:
+  /// **'Fix Grammar'**
+  String get saPresetFixGrammar;
+
+  /// No description provided for @saPresetTranslateAndRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Translate & Read'**
+  String get saPresetTranslateAndRead;
+
+  /// No description provided for @saPromptSummarize.
+  ///
+  /// In en, this message translates to:
+  /// **'Summarize concisely: {text}'**
+  String saPromptSummarize(String text);
+
+  /// No description provided for @saPromptExplain.
+  ///
+  /// In en, this message translates to:
+  /// **'Explain simply: {text}'**
+  String saPromptExplain(String text);
+
+  /// No description provided for @saPromptFixGrammar.
+  ///
+  /// In en, this message translates to:
+  /// **'Fix grammar and style: {text}'**
+  String saPromptFixGrammar(String text);
+
+  /// No description provided for @saPromptTranslate.
+  ///
+  /// In en, this message translates to:
+  /// **'Translate the following text to {targetLanguage}. Return only the translation, no explanations:\n\n{text}'**
+  String saPromptTranslate(String targetLanguage, String text);
+
+  /// No description provided for @saActionTranslate.
+  ///
+  /// In en, this message translates to:
+  /// **'Translate'**
+  String get saActionTranslate;
+
+  /// No description provided for @saActionRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Read'**
+  String get saActionRead;
+
+  /// No description provided for @saActionSendToChat.
+  ///
+  /// In en, this message translates to:
+  /// **'Send to Chat'**
+  String get saActionSendToChat;
+
+  /// No description provided for @saResultCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get saResultCopy;
+
+  /// No description provided for @saResultClose.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get saResultClose;
+
+  /// No description provided for @saResultRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get saResultRetry;
+
+  /// No description provided for @saResultCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get saResultCancel;
+
+  /// No description provided for @saResultProcessing.
+  ///
+  /// In en, this message translates to:
+  /// **'Processing...'**
+  String get saResultProcessing;
+
+  /// No description provided for @saResultTranslationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Translation'**
+  String get saResultTranslationTitle;
+
+  /// No description provided for @saResultLanguageSelector.
+  ///
+  /// In en, this message translates to:
+  /// **'Target language'**
+  String get saResultLanguageSelector;
+
+  /// No description provided for @saErrorNoProvider.
+  ///
+  /// In en, this message translates to:
+  /// **'Please configure an LLM provider in Kelivo settings'**
+  String get saErrorNoProvider;
+
+  /// No description provided for @saErrorTimeout.
+  ///
+  /// In en, this message translates to:
+  /// **'Request timed out. Please try again.'**
+  String get saErrorTimeout;
+
+  /// No description provided for @saErrorNetwork.
+  ///
+  /// In en, this message translates to:
+  /// **'Network error: {message}'**
+  String saErrorNetwork(String message);
+
+  /// No description provided for @saErrorApiKey.
+  ///
+  /// In en, this message translates to:
+  /// **'API key error (code: {code}). Please check your settings.'**
+  String saErrorApiKey(String code);
+
+  /// No description provided for @saSettingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Selection Assistant'**
+  String get saSettingsTitle;
+
+  /// No description provided for @saSettingsEnable.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Selection Assistant'**
+  String get saSettingsEnable;
+
+  /// No description provided for @saSettingsEnableSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Detect text selection in other apps'**
+  String get saSettingsEnableSubtitle;
+
+  /// No description provided for @saSettingsShowTranslate.
+  ///
+  /// In en, this message translates to:
+  /// **'Show Translate button'**
+  String get saSettingsShowTranslate;
+
+  /// No description provided for @saSettingsShowTts.
+  ///
+  /// In en, this message translates to:
+  /// **'Show Read button'**
+  String get saSettingsShowTts;
+
+  /// No description provided for @saSettingsShowChat.
+  ///
+  /// In en, this message translates to:
+  /// **'Show Send to Chat button'**
+  String get saSettingsShowChat;
+
+  /// No description provided for @saSettingsShowPresets.
+  ///
+  /// In en, this message translates to:
+  /// **'Show preset buttons'**
+  String get saSettingsShowPresets;
+
+  /// No description provided for @saSettingsDismissDelay.
+  ///
+  /// In en, this message translates to:
+  /// **'Dismiss delay'**
+  String get saSettingsDismissDelay;
+
+  /// No description provided for @saSettingsDismissDelayMs.
+  ///
+  /// In en, this message translates to:
+  /// **'{ms}ms'**
+  String saSettingsDismissDelayMs(int ms);
+
+  /// No description provided for @saSettingsTranslateLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Translation target language'**
+  String get saSettingsTranslateLanguage;
+
+  /// No description provided for @saSettingsMaxTextLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Max text length'**
+  String get saSettingsMaxTextLength;
+
+  /// No description provided for @saSettingsMaxTextLengthChars.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} characters'**
+  String saSettingsMaxTextLengthChars(int n);
+
+  /// No description provided for @saAccessibilityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Accessibility Permission Required'**
+  String get saAccessibilityTitle;
+
+  /// No description provided for @saAccessibilityMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Selection Assistant needs Accessibility access to detect selected text. No data is sent without your action.'**
+  String get saAccessibilityMessage;
+
+  /// No description provided for @saAccessibilityOpenSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open System Settings'**
+  String get saAccessibilityOpenSettings;
+
+  /// No description provided for @saAccessibilityGranted.
+  ///
+  /// In en, this message translates to:
+  /// **'Permission granted'**
+  String get saAccessibilityGranted;
+
+  /// No description provided for @saAccessibilityWaiting.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for permission...'**
+  String get saAccessibilityWaiting;
+
+  /// No description provided for @saTrayToggleOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Disable Selection Assistant'**
+  String get saTrayToggleOn;
+
+  /// No description provided for @saTrayToggleOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Selection Assistant'**
+  String get saTrayToggleOff;
+
+  /// No description provided for @saRequiresTray.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable \'Minimize to tray on close\' to use this feature'**
+  String get saRequiresTray;
 }
 
 class _AppLocalizationsDelegate

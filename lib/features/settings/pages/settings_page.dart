@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show defaultTargetPlatform, TargetPlatform;
 import '../../../l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import '../../../icons/lucide_adapter.dart';
@@ -22,6 +23,7 @@ import 'storage_space_page.dart';
 import '../../../core/services/storage/storage_usage_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/services/haptics.dart';
+import '../../../desktop/selection_assistant/selection_assistant_settings_pane.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -183,6 +185,21 @@ class SettingsPage extends StatelessWidget {
                   );
                 },
               ),
+              if (defaultTargetPlatform == TargetPlatform.macOS) ...[
+                _iosDivider(context),
+                _iosNavRow(
+                  context,
+                  icon: Lucide.TextSelect,
+                  label: l10n.saSettingsTitle,
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const SelectionAssistantSettingsPane(),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ],
           ),
 

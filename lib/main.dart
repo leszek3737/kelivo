@@ -43,6 +43,9 @@ import 'dart:io'
 import 'core/services/android_background.dart';
 import 'core/services/notification_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'desktop/selection_assistant/toolbar_overlay_app.dart';
+import 'desktop/selection_assistant/result_overlay_app.dart';
+import 'shared/interfaces/markdown_settings.dart';
 
 final RouteObserver<ModalRoute<dynamic>> routeObserver =
     RouteObserver<ModalRoute<dynamic>>();
@@ -116,6 +119,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ChatProvider()),
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => SettingsProvider()),
+        // Expose SettingsProvider as MarkdownSettings interface so widgets
+        // that call context.watch<MarkdownSettings>() can resolve it.
+        ProxyProvider<SettingsProvider, MarkdownSettings>(
+          update: (_, sp, __) => sp,
+        ),
         ChangeNotifierProvider(create: (_) => ChatService()),
         ChangeNotifierProvider(create: (_) => McpToolService()),
         ChangeNotifierProvider(create: (_) => McpProvider()),
@@ -451,3 +459,29 @@ Widget _selectHome() {
 }
 
 // Overrides logic is implemented within SettingsProvider now.
+
+@pragma('vm:entry-point')
+void toolbarOverlay() {
+  WidgetsFlutterBinding.ensureInitialized();
+  FlutterError.onError = (FlutterErrorDetails details) {
+    debugPrint('toolbarOverlay FlutterError: ${details.exceptionAsString()}');
+    try {
+      const MethodChannel('app.selectionAssistant/toolbar')
+          .invokeMethod('dismiss');
+    } catch (_) {}
+  };
+  runApp(const ToolbarOverlayApp());
+}
+
+@pragma('vm:entry-point')
+void resultOverlay() {
+  WidgetsFlutterBinding.ensureInitialized();
+  FlutterError.onError = (FlutterErrorDetails details) {
+    debugPrint('resultOverlay FlutterError: ${details.exceptionAsString()}');
+    try {
+      const MethodChannel('app.selectionAssistant/result')
+          .invokeMethod('dismiss');
+    } catch (_) {}
+  };
+  runApp(const ResultOverlayApp());
+}

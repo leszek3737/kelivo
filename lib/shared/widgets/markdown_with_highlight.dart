@@ -25,7 +25,7 @@ import 'package:Kelivo/l10n/app_localizations.dart';
 import 'package:Kelivo/theme/theme_factory.dart' show getPlatformFontFallback;
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../core/providers/settings_provider.dart';
+import '../interfaces/markdown_settings.dart';
 import 'package:Kelivo/desktop/html_preview_dialog.dart';
 
 /// gpt_markdown with custom code block highlight and inline code styling.
@@ -49,7 +49,7 @@ class MarkdownWithCodeHighlight extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settings = context.watch<SettingsProvider>();
+    final settings = context.watch<MarkdownSettings>();
     final cs = Theme.of(context).colorScheme;
     final sanitizedText = _sanitizeImageLinks(text);
     final imageUrls = _extractImageUrls(sanitizedText);
@@ -1041,7 +1041,7 @@ class _CollapsibleCodeBlockState extends State<_CollapsibleCodeBlock> {
   }
 
   void _applyInitialAutoCollapse() {
-    final sp = context.read<SettingsProvider>();
+    final sp = context.read<MarkdownSettings>();
     if (!sp.autoCollapseCodeBlock) return;
     final threshold = sp.autoCollapseCodeBlockLines;
     if (_exceedsLineThreshold(widget.code, threshold)) {
@@ -1052,7 +1052,7 @@ class _CollapsibleCodeBlockState extends State<_CollapsibleCodeBlock> {
   void _applyAutoCollapseIfNeeded() {
     if (_manuallyToggled) return;
     if (!_expanded) return;
-    final sp = context.read<SettingsProvider>();
+    final sp = context.read<MarkdownSettings>();
     if (!sp.autoCollapseCodeBlock) return;
     final threshold = sp.autoCollapseCodeBlockLines;
 
@@ -1065,7 +1065,7 @@ class _CollapsibleCodeBlockState extends State<_CollapsibleCodeBlock> {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final settings = context.watch<SettingsProvider>();
+    final settings = context.watch<MarkdownSettings>();
     String resolveCodeFont() {
       final fam = settings.codeFontFamily;
       if (fam == null || fam.isEmpty) return 'monospace';
@@ -2254,7 +2254,7 @@ class AtxHeadingMd extends BlockMd {
   ) {
     final cs = Theme.of(ctx).colorScheme;
     final isZh = MarkdownWithCodeHighlight._isZh(ctx);
-    final settings = ctx.read<SettingsProvider>();
+    final settings = ctx.read<MarkdownSettings>();
     String? appFamily;
     if ((settings.appFontFamily ?? '').isNotEmpty) {
       appFamily = settings.appFontFamily;

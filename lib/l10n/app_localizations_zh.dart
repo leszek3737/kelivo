@@ -4206,6 +4206,148 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get worldBookInjectionRoleAssistant => '助手';
+
+  @override
+  String get saPresetSummarize => '总结';
+
+  @override
+  String get saPresetExplain => '解释';
+
+  @override
+  String get saPresetFixGrammar => '修正语法';
+
+  @override
+  String get saPresetTranslateAndRead => '翻译并朗读';
+
+  @override
+  String saPromptSummarize(String text) {
+    return '简洁地总结以下内容：$text';
+  }
+
+  @override
+  String saPromptExplain(String text) {
+    return '用简单的语言解释：$text';
+  }
+
+  @override
+  String saPromptFixGrammar(String text) {
+    return '修正以下文本的语法和风格：$text';
+  }
+
+  @override
+  String saPromptTranslate(String targetLanguage, String text) {
+    return '将以下文本翻译成$targetLanguage。只返回翻译结果，不要解释：\n\n$text';
+  }
+
+  @override
+  String get saActionTranslate => '翻译';
+
+  @override
+  String get saActionRead => '朗读';
+
+  @override
+  String get saActionSendToChat => '发送到聊天';
+
+  @override
+  String get saResultCopy => '复制';
+
+  @override
+  String get saResultClose => '关闭';
+
+  @override
+  String get saResultRetry => '重试';
+
+  @override
+  String get saResultCancel => '取消';
+
+  @override
+  String get saResultProcessing => '处理中...';
+
+  @override
+  String get saResultTranslationTitle => '翻译';
+
+  @override
+  String get saResultLanguageSelector => '目标语言';
+
+  @override
+  String get saErrorNoProvider => '请在 Kelivo 设置中配置 LLM 提供商';
+
+  @override
+  String get saErrorTimeout => '请求超时，请重试。';
+
+  @override
+  String saErrorNetwork(String message) {
+    return '网络错误：$message';
+  }
+
+  @override
+  String saErrorApiKey(String code) {
+    return 'API 密钥错误（代码：$code），请检查设置。';
+  }
+
+  @override
+  String get saSettingsTitle => '选文助手';
+
+  @override
+  String get saSettingsEnable => '启用选文助手';
+
+  @override
+  String get saSettingsEnableSubtitle => '检测其他应用中的文本选择';
+
+  @override
+  String get saSettingsShowTranslate => '显示翻译按钮';
+
+  @override
+  String get saSettingsShowTts => '显示朗读按钮';
+
+  @override
+  String get saSettingsShowChat => '显示发送到聊天按钮';
+
+  @override
+  String get saSettingsShowPresets => '显示预设按钮';
+
+  @override
+  String get saSettingsDismissDelay => '自动关闭延迟';
+
+  @override
+  String saSettingsDismissDelayMs(int ms) {
+    return '${ms}ms';
+  }
+
+  @override
+  String get saSettingsTranslateLanguage => '翻译目标语言';
+
+  @override
+  String get saSettingsMaxTextLength => '最大文本长度';
+
+  @override
+  String saSettingsMaxTextLengthChars(int n) {
+    return '$n 个字符';
+  }
+
+  @override
+  String get saAccessibilityTitle => '需要辅助功能权限';
+
+  @override
+  String get saAccessibilityMessage => '选文助手需要辅助功能权限来检测选中的文本。未经您的操作，不会发送任何数据。';
+
+  @override
+  String get saAccessibilityOpenSettings => '打开系统设置';
+
+  @override
+  String get saAccessibilityGranted => '权限已授予';
+
+  @override
+  String get saAccessibilityWaiting => '等待权限...';
+
+  @override
+  String get saTrayToggleOn => '禁用选文助手';
+
+  @override
+  String get saTrayToggleOff => '启用选文助手';
+
+  @override
+  String get saRequiresTray => '请启用「关闭时最小化到托盘」以使用此功能';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hans`).
@@ -8358,6 +8500,148 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get worldBookInjectionRoleAssistant => '助手';
+
+  @override
+  String get saPresetSummarize => '总结';
+
+  @override
+  String get saPresetExplain => '解释';
+
+  @override
+  String get saPresetFixGrammar => '修正语法';
+
+  @override
+  String get saPresetTranslateAndRead => '翻译并朗读';
+
+  @override
+  String saPromptSummarize(String text) {
+    return '简洁地总结以下内容：$text';
+  }
+
+  @override
+  String saPromptExplain(String text) {
+    return '用简单的语言解释：$text';
+  }
+
+  @override
+  String saPromptFixGrammar(String text) {
+    return '修正以下文本的语法和风格：$text';
+  }
+
+  @override
+  String saPromptTranslate(String targetLanguage, String text) {
+    return '将以下文本翻译成$targetLanguage。只返回翻译结果，不要解释：\n\n$text';
+  }
+
+  @override
+  String get saActionTranslate => '翻译';
+
+  @override
+  String get saActionRead => '朗读';
+
+  @override
+  String get saActionSendToChat => '发送到聊天';
+
+  @override
+  String get saResultCopy => '复制';
+
+  @override
+  String get saResultClose => '关闭';
+
+  @override
+  String get saResultRetry => '重试';
+
+  @override
+  String get saResultCancel => '取消';
+
+  @override
+  String get saResultProcessing => '处理中...';
+
+  @override
+  String get saResultTranslationTitle => '翻译';
+
+  @override
+  String get saResultLanguageSelector => '目标语言';
+
+  @override
+  String get saErrorNoProvider => '请在 Kelivo 设置中配置 LLM 提供商';
+
+  @override
+  String get saErrorTimeout => '请求超时，请重试。';
+
+  @override
+  String saErrorNetwork(String message) {
+    return '网络错误：$message';
+  }
+
+  @override
+  String saErrorApiKey(String code) {
+    return 'API 密钥错误（代码：$code），请检查设置。';
+  }
+
+  @override
+  String get saSettingsTitle => '选文助手';
+
+  @override
+  String get saSettingsEnable => '启用选文助手';
+
+  @override
+  String get saSettingsEnableSubtitle => '检测其他应用中的文本选择';
+
+  @override
+  String get saSettingsShowTranslate => '显示翻译按钮';
+
+  @override
+  String get saSettingsShowTts => '显示朗读按钮';
+
+  @override
+  String get saSettingsShowChat => '显示发送到聊天按钮';
+
+  @override
+  String get saSettingsShowPresets => '显示预设按钮';
+
+  @override
+  String get saSettingsDismissDelay => '自动关闭延迟';
+
+  @override
+  String saSettingsDismissDelayMs(int ms) {
+    return '${ms}ms';
+  }
+
+  @override
+  String get saSettingsTranslateLanguage => '翻译目标语言';
+
+  @override
+  String get saSettingsMaxTextLength => '最大文本长度';
+
+  @override
+  String saSettingsMaxTextLengthChars(int n) {
+    return '$n 个字符';
+  }
+
+  @override
+  String get saAccessibilityTitle => '需要辅助功能权限';
+
+  @override
+  String get saAccessibilityMessage => '选文助手需要辅助功能权限来检测选中的文本。未经您的操作，不会发送任何数据。';
+
+  @override
+  String get saAccessibilityOpenSettings => '打开系统设置';
+
+  @override
+  String get saAccessibilityGranted => '权限已授予';
+
+  @override
+  String get saAccessibilityWaiting => '等待权限...';
+
+  @override
+  String get saTrayToggleOn => '禁用选文助手';
+
+  @override
+  String get saTrayToggleOff => '启用选文助手';
+
+  @override
+  String get saRequiresTray => '请启用「关闭时最小化到托盘」以使用此功能';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -12556,4 +12840,146 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get worldBookInjectionRoleAssistant => '助手';
+
+  @override
+  String get saPresetSummarize => '總結';
+
+  @override
+  String get saPresetExplain => '解釋';
+
+  @override
+  String get saPresetFixGrammar => '修正語法';
+
+  @override
+  String get saPresetTranslateAndRead => '翻譯並朗讀';
+
+  @override
+  String saPromptSummarize(String text) {
+    return '簡潔地總結以下內容：$text';
+  }
+
+  @override
+  String saPromptExplain(String text) {
+    return '用簡單的語言解釋：$text';
+  }
+
+  @override
+  String saPromptFixGrammar(String text) {
+    return '修正以下文字的語法和風格：$text';
+  }
+
+  @override
+  String saPromptTranslate(String targetLanguage, String text) {
+    return '將以下文字翻譯成$targetLanguage。只返回翻譯結果，不要解釋：\n\n$text';
+  }
+
+  @override
+  String get saActionTranslate => '翻譯';
+
+  @override
+  String get saActionRead => '朗讀';
+
+  @override
+  String get saActionSendToChat => '發送到聊天';
+
+  @override
+  String get saResultCopy => '複製';
+
+  @override
+  String get saResultClose => '關閉';
+
+  @override
+  String get saResultRetry => '重試';
+
+  @override
+  String get saResultCancel => '取消';
+
+  @override
+  String get saResultProcessing => '處理中...';
+
+  @override
+  String get saResultTranslationTitle => '翻譯';
+
+  @override
+  String get saResultLanguageSelector => '目標語言';
+
+  @override
+  String get saErrorNoProvider => '請在 Kelivo 設定中配置 LLM 提供商';
+
+  @override
+  String get saErrorTimeout => '請求逾時，請重試。';
+
+  @override
+  String saErrorNetwork(String message) {
+    return '網路錯誤：$message';
+  }
+
+  @override
+  String saErrorApiKey(String code) {
+    return 'API 金鑰錯誤（代碼：$code），請檢查設定。';
+  }
+
+  @override
+  String get saSettingsTitle => '選文助手';
+
+  @override
+  String get saSettingsEnable => '啟用選文助手';
+
+  @override
+  String get saSettingsEnableSubtitle => '偵測其他應用程式中的文字選取';
+
+  @override
+  String get saSettingsShowTranslate => '顯示翻譯按鈕';
+
+  @override
+  String get saSettingsShowTts => '顯示朗讀按鈕';
+
+  @override
+  String get saSettingsShowChat => '顯示發送到聊天按鈕';
+
+  @override
+  String get saSettingsShowPresets => '顯示預設按鈕';
+
+  @override
+  String get saSettingsDismissDelay => '自動關閉延遲';
+
+  @override
+  String saSettingsDismissDelayMs(int ms) {
+    return '${ms}ms';
+  }
+
+  @override
+  String get saSettingsTranslateLanguage => '翻譯目標語言';
+
+  @override
+  String get saSettingsMaxTextLength => '最大文字長度';
+
+  @override
+  String saSettingsMaxTextLengthChars(int n) {
+    return '$n 個字元';
+  }
+
+  @override
+  String get saAccessibilityTitle => '需要輔助使用權限';
+
+  @override
+  String get saAccessibilityMessage => '選文助手需要輔助使用權限來偵測選取的文字。未經您的操作，不會傳送任何資料。';
+
+  @override
+  String get saAccessibilityOpenSettings => '開啟系統設定';
+
+  @override
+  String get saAccessibilityGranted => '已授予權限';
+
+  @override
+  String get saAccessibilityWaiting => '等待權限...';
+
+  @override
+  String get saTrayToggleOn => '停用選文助手';
+
+  @override
+  String get saTrayToggleOff => '啟用選文助手';
+
+  @override
+  String get saRequiresTray => '請啟用「關閉時最小化到系統列」以使用此功能';
 }

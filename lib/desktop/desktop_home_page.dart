@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart'
-    show defaultTargetPlatform, TargetPlatform;
+    show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter/services.dart';
 import 'desktop_nav_rail.dart';
 import 'desktop_chat_page.dart';
 import 'window_title_bar.dart';
@@ -35,6 +36,9 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
   bool _globalSearchActive = false;
   StreamSubscription<HotkeyAction>? _hotkeySub;
   StreamSubscription<ChatAction>? _chatActionSub;
+
+  // Selection Assistant MethodChannel
+  MethodChannel? _saMainChannel;
 
   @override
   void initState() {
@@ -117,6 +121,33 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
       }
     });
 
+    // Register Selection Assistant MethodChannel on macOS to accept
+    // 'focusAndSetText' calls from the native SA extension.
+    if (!kIsWeb && defaultTargetPlatform == TargetPlatform.macOS) {
+      _saMainChannel = const MethodChannel('app.selectionAssistant/main');
+      _saMainChannel!.setMethodCallHandler((call) async {
+        switch (call.method) {
+          case 'focusAndSetText':
+            final text = (call.arguments is Map)
+                ? (call.arguments as Map)['text'] as String? ?? ''
+                : call.arguments?.toString() ?? '';
+            if (text.isNotEmpty) {
+              ChatActionBus.instance.fireWithText(text);
+            }
+            break;
+          case 'axPermissionGranted':
+            // Forwarded to AccessibilityOnboardingDialog via a dedicated
+            // channel so AccessibilityOnboardingDialog can close itself.
+            // We re-invoke on the dedicated channel here to avoid handler dedup.
+            try {
+              await const MethodChannel('app.selectionAssistant/onboarding')
+                  .invokeMethod('axPermissionGranted');
+            } catch (_) {}
+            break;
+        }
+      });
+    }
+
     _chatActionSub = ChatActionBus.instance.stream.listen((action) {
       if (!mounted) return;
       switch (action) {
@@ -130,6 +161,17 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
           setState(() {
             _globalSearchActive = false;
           });
+          break;
+        case ChatAction.focusInputWithText:
+          // Switch to the chat tab so the input field is visible, then let
+          // HomePageController handle focus + text insertion via popPendingText.
+          if (mounted) {
+            setState(() {
+              _tabIndex = 0;
+              _globalSearchActive = false;
+            });
+            ChatActionBus.instance.fire(ChatAction.exitGlobalSearch);
+          }
           break;
         default:
           break;
@@ -271,6 +313,9 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
     } catch (_) {}
     try {
       _chatActionSub?.cancel();
+    } catch (_) {}
+    try {
+      _saMainChannel?.setMethodCallHandler(null);
     } catch (_) {}
     super.dispose();
   }

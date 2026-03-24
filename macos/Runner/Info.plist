@@ -28,5 +28,7 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSAccessibilityUsageDescription</key>
+	<string>Selection Assistant needs accessibility access to monitor text selections in other applications and display contextual action toolbars.</string>
 </dict>
 </plist>

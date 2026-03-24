@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart'
     show kIsWeb, defaultTargetPlatform, TargetPlatform;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tray_manager/tray_manager.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -18,8 +19,10 @@ class DesktopTrayController with TrayListener, WindowListener {
   bool _trayVisible = false;
   bool _showTraySetting = false;
   bool _minimizeToTrayOnClose = false;
+  bool _saEnabled = false;
   String _localeKey = '';
   bool _contextMenuOpen = false;
+  AppLocalizations? _l10n;
 
   /// Sync tray state from settings & current localization.
   /// Safe to call multiple times; initialization is performed lazily.
@@ -52,6 +55,13 @@ class DesktopTrayController with TrayListener, WindowListener {
     // Persist latest settings (enforce basic invariant in controller as well).
     _showTraySetting = showTray;
     _minimizeToTrayOnClose = showTray && minimizeToTrayOnClose;
+    _l10n = l10n;
+
+    // Load SA toggle state from SharedPreferences.
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      _saEnabled = prefs.getBool('sa_enabled') ?? false;
+    } catch (_) {}
 
     // Whether to intercept window close.
     final shouldPreventClose = _showTraySetting && _minimizeToTrayOnClose;
@@ -112,6 +122,8 @@ class DesktopTrayController with TrayListener, WindowListener {
             onClick: (_) async => _showWindow(),
           ),
           MenuItem.separator(),
+          _buildSaMenuItem(l10n),
+          MenuItem.separator(),
           MenuItem(
             label: l10n.desktopTrayMenuExit,
             onClick: (_) async => _exitApp(),
@@ -120,6 +132,28 @@ class DesktopTrayController with TrayListener, WindowListener {
       );
       await trayManager.setContextMenu(menu);
     } catch (_) {}
+  }
+
+  /// Build the Selection Assistant toggle menu item based on current [_saEnabled].
+  MenuItem _buildSaMenuItem(AppLocalizations l10n) {
+    return MenuItem(
+      label: _saEnabled ? l10n.saTrayToggleOn : l10n.saTrayToggleOff,
+      onClick: (_) async => _toggleSaEnabled(),
+    );
+  }
+
+  /// Toggle the `sa_enabled` SharedPreferences key and rebuild the tray menu.
+  Future<void> _toggleSaEnabled() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      _saEnabled = !_saEnabled;
+      await prefs.setBool('sa_enabled', _saEnabled);
+    } catch (_) {}
+    // Rebuild the tray menu to reflect the new state.
+    final l10n = _l10n;
+    if (l10n != null && _trayVisible) {
+      await _ensureTrayIconAndMenu(l10n);
+    }
   }
 
   Future<void> _showWindow() async {
